@@ -20,7 +20,7 @@ export default function Home() {
       subtitle: 'Приложение о нейрофотографии',
       image: '/code_2.jpg',
       tags: ['Typescript', 'React', 'Next.Js'],
-      link: 'https://garry-potter-app.vercel.app/',
+      link: 'https://artneiro.vercel.app/',
     },
   ];
 
@@ -38,17 +38,14 @@ export default function Home() {
   };
 
   const navRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-
       const target = e.target as HTMLElement;
 
       // Проверяем, кликнули ли по ссылке меню
       const isClickOnLink =
         target.classList.contains('nav__link') || target.closest('.nav__link');
-
-
 
       // Если меню открыто и клик НЕ по меню, НЕ по бургеру и НЕ по ссылке — закрываем
       if (isOpen && navRef) {
