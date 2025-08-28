@@ -1,0 +1,393 @@
+// Переменные
+@use 'sass:color';
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aladin&display=swap');
+
+
+// =============================================================================
+// ЛУЧШИЙ SCSS RESET (чистый, современный, доступный)
+// Сбрасывает стили, но не ломает семантику
+// =============================================================================
+
+// 1. Установка box-sizing для всех элементов — удобно и предсказуемо
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// 2. Сброс всех отступов и полей по умолчанию
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  vertical-align: inherit;
+  background: none;
+  list-style: none;
+  text-decoration: none;
+  appearance: none; // Убирает системные стили (для input, button и т.д.)
+}
+
+
+// 4. Сброс стилей для типографики
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+ul,
+ol,
+dl,
+figure,
+pre {
+  margin: 0;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+// 5. Изображения и медиа
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// 6. Формы — сброс + доступность
+input,
+button,
+textarea,
+select {
+  width: auto;
+  min-height: 44px; // Минимальная тач-область
+  line-height: 1.5;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  resize: none;
+  outline: none;
+
+  &::placeholder {
+    color: #999;
+    opacity: 1;
+  }
+}
+
+// 7. Ссылки — базовые стили
+a {
+  cursor: pointer;
+  text-decoration-skip-ink: auto;
+
+  // Если хочешь, можно добавить подчёркивание только при ховере
+  &:not(:hover) {
+    text-decoration: none;
+  }
+}
+
+// 8. Кнопки и ссылки с поведением кнопки
+button,
+[role="button"] {
+  cursor: pointer;
+  background: transparent;
+}
+
+// 9. Списки
+ul,
+ol {
+  list-style: none;
+}
+
+// 10. Таблицы
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0;
+  text-align: left;
+}
+
+// 11. Контейнеры с потоком
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+// 12. Исправление отображения для старых браузеров
+audio,
+video {
+  display: inline-block;
+}
+
+// 13. Предотвращение переполнения
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth; // Опционально: плавная прокрутка
+
+}
+
+
+
+
+$black: #000;
+$white: #fff;
+$yellow: #FF7949;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+
+
+
+body {
+  margin:0;
+  font-family: 'Jura', sans-serif;
+  line-height: 1.6;
+  color: $white;
+  background: $black;
+  min-height: 100vh;
+  position: relative;
+
+}
+
+.wrapper {
+
+  &.noscroll {
+    overflow: hidden;
+  }
+}
+
+
+// Контейнер
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 1001;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: $white;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+}
+
+// Единое меню — адаптивное
+.nav {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.125rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__link {
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  // Мобильная версия — фиксированное выезжающее меню
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $yellow;
+    color: $black;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none; // скрывает от взаимодействия
+
+
+    &.active {
+      opacity: 1;
+      pointer-events: auto; // включает взаимодействие
+    }
+
+    // Стили для списка внутри меню
+    .nav__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      margin-top: 4rem;
+    }
+
+    .nav__item {
+      width: 100%;
+      text-align: center;
+    }
+
+    .nav__link {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 14px 0;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+      background: color.adjust($yellow, $lightness: -20%);
+      color: $white;
+      font-weight: 600;
+      text-align: center;
+      text-shadow: 1px 1px black;
+    }
+
+  }
+}
+
+// Показываем бургер на мобильных
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+}
+
+// Основной контент
+.main {
+  padding: 2rem 0;
+}
+
+.section {
+  padding: 4rem 0;
+
+  &.hero {
+    text-align: center;
+  }
+}
+
+.hero {
+  &__title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+
+    @media (min-width: 768px) {
+      font-size: 4rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 5rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    max-width: 70ch;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 2rem;
+    }
+  }
+
+  &__social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+// Кнопки
+.btn {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Aladin", system-ui;
+  color: $black;
+
+
+  &-outline {
+    border: 1px solid $gray-300;
+    background: $yellow;
+
+    &:hover {
+      background: $white;
+      color: $yellow;
+    }
+  }
+
+  &-primary {
+    background: $black;
+    color: $white;
+    border: none;
+    padding: 0.75rem 2rem;
+
+    &:hover {
+      background: $gray-700;
+    }
+  }
+}

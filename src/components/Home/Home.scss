@@ -1,0 +1,223 @@
+
+$black: #000;
+$white: #fff;
+$yellow: #FF7949;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+
+// Заголовки секций
+.section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+
+	@media (max-width: 640px) {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+}
+
+.section__title {
+	font-size: 2rem;
+	font-weight: 700;
+
+	&--large {
+		font-size: 3rem;
+
+		@media (min-width: 768px) {
+			font-size: 4rem;
+		}
+	}
+}
+
+.tag {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.5rem;
+	font-size: 0.875rem;
+
+	&--small {
+		padding: 0.375rem 0.625rem;
+		background: $gray-200;
+		color: $gray-700;
+		font-size: 0.75rem;
+	}
+
+	&--white {
+		background: $white;
+		color: $black;
+	}
+}
+
+// Проекты
+.projects__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+	color:$black;
+
+	@media (min-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.project-card {
+	border: 1px solid $gray-200;
+	overflow: hidden;
+	background: $gray-100;
+	transition: background 0.3s ease;
+
+	&:hover {
+		background: $yellow;
+	}
+}
+
+.project-card__image-wrapper {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 16 / 9;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;
+	transition: transform 0.3s ease;
+
+	&:hover {
+		transform: scale(1.05);
+	}
+}
+
+.project-card__content {
+	padding: 1.5rem;
+}
+
+.project-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+}
+
+.project-card__title {
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.project-card__subtitle {
+	margin-bottom: 1rem;
+}
+
+.project-card__tags {
+	display: flex;
+	gap: 0.5rem;
+}
+
+// Достижения
+.achievements__grid {
+	display: grid;
+	grid-template-columns: 1fr; // всегда один столбец
+	gap: 1.5rem;
+}
+
+.achievement-card {
+	background: $gray-100;
+	color: $gray-800;
+	padding: 1.5rem;
+	border: 1px solid $gray-200;
+	transition: background 0.3s ease, transform 0.2s ease;
+
+	&:hover {
+		background: $gray-200;
+		transform: translateY(-2px);
+	}
+}
+
+.achievement-card__title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+
+.achievement-card__org {
+	color: $gray-600;
+	font-size: 0.875rem;
+}
+
+// Контакты
+.contact {
+	text-align: center;
+
+	&__social {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	&__text {
+		color: $yellow;
+		max-width: 60ch;
+		font-size: 24px;
+		margin: 0 auto 2rem;
+	}
+}
+
+// Футер
+.footer {
+	border-top: 1px solid $gray-200;
+	padding: 2rem 0;
+
+	.container {
+		text-align: center;
+
+		@media (min-width: 768px) {
+			text-align: left;
+		}
+	}
+
+	&__links {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+
+		a {
+			color: $gray-600;
+			text-decoration: none;
+			transition: color 0.2s;
+
+			&:hover {
+				color: $black;
+			}
+		}
+	}
+}
+
+// // Адаптив для мобильного меню (бургер)
+// @media (max-width: 768px) {
+// 	.nav.active~.burger span:nth-child(1) {
+// 		transform: rotate(-45deg) translate(-5px, 6px);
+// 	}
+
+// 	.nav.active~.burger span:nth-child(2) {
+// 		opacity: 0;
+// 	}
+
+// 	.nav.active~.burger span:nth-child(3) {
+// 		transform: rotate(45deg) translate(-5px, -6px);
+// 	}
+// }
+/* Скрываем бургер, когда меню активно (только на мобильных) */
+@media (max-width: 768px) {
+	.nav.active~.burger {
+		display: none;
+	}
+}
