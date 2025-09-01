@@ -4,6 +4,8 @@ import './Home.scss';
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 
+
+
 export default function Home() {
   const projects = [
     {

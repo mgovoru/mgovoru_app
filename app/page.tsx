@@ -4,7 +4,10 @@ import React from 'react';
 import Home from './components/Home/home';
 import DotGrid from './components/DotGrid/DotGrid';
 
-export default function App() {
+
+export default function App() { 
+
+
   return (
     <>
       <div
